@@ -2,7 +2,6 @@
     namespace Server\Routes;
 
     class RouteParams {
-        public static $url ='';
         public static $body = [];
         public static $query = [];
 
@@ -15,9 +14,6 @@
             // Remove Url
             array_shift($requestData);
             self::$query = $requestData;
-        }
-        public static function getUrl(){
-            
         }
     }
 
