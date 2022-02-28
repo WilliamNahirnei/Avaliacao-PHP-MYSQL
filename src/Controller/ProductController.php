@@ -5,7 +5,8 @@
     require_once('./Server/Routes/RouteParams.php');
     require_once('./src/Services/ProductService.php');
 
-    use Server\Routes\RouteParams;
+use Server\Routes\Route;
+use Server\Routes\RouteParams;
     use src\Services\ProductService;
 
     class ProductController {
@@ -13,13 +14,13 @@
         static function insertProduct(){
             $productService = new ProductService();
             $data = $productService->insertProduct(RouteParams::$body);
+            return json_encode($data);
+        }
 
-            http_response_code(404);
-            $Response = [
-                'Message'=> "NotFound"
-            ];
-    
-            $Response = json_encode($Response);
+        static function updateProductAndPrice(){
+            $productService = new ProductService();
+            $data = $productService->updateProductAndPrice(RouteParams::$query, RouteParams::$body);
+            return json_encode($data);
         }
     }
 ?>

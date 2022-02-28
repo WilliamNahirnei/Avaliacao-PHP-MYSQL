@@ -12,4 +12,5 @@
     Route::get("teste", [testeController::class, 'testecontroler']);
 
     Route::post('insertProduct',[ProductController::class, 'insertProduct']);
+    Route::put('updateProductAndPrice',[ProductController::class, 'updateProductAndPrice']);
 ?>

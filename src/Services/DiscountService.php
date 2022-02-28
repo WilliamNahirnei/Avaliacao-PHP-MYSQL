@@ -24,8 +24,8 @@
             };
         }
         
-        public function calculateColorDiscount($color){
-            return call_user_func(self::$colorDiscounts[$color],100); 
+        public function calculateColorDiscount($color, $price){
+            return call_user_func(self::$colorDiscounts[$color], $price); 
         }
 
         private function calculatePriceWithDiscount(float $price, float $percentageDiscount): float{

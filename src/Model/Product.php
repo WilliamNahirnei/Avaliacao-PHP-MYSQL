@@ -10,13 +10,11 @@
         public int $idProduct = 0;
         public string $nameProduct = "";
         public string $colorProduct = "";
-        public $price= null;
 
-        function __construct(int $idProduct, string $nameProduct, string $colorProduct, $price){
+        function __construct(int $idProduct, string $nameProduct, string $colorProduct){
             $this->idProduct = $idProduct;
             $this->nameProduct = $nameProduct;
             $this->colorProduct = $colorProduct;
-            $this->price = $price;
         }
 
         public static function getProductById($idProduct){
