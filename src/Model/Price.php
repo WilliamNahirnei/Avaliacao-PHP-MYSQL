@@ -9,7 +9,7 @@ use src\Services\ProductService;
         private Product $product;
 
         function __construct(int $idPrice, float $price,Product $product){
-            self::$idPrice;
+            self::$idPrice = $idPrice;
             self::$price = $price;
             self::$product = $product;
         }

@@ -2,7 +2,9 @@
     namespace src\Services;
 
     require_once('./src/Model/Product.php');
-    include('./src/Database/conection.php');
+    require_once('src\Services\DiscountService.php');
+
+    use src\Services\DiscountService;
 
 use Controller\ProductController;
 use src\Model\Product;
@@ -21,8 +23,11 @@ use src\Model\Product;
                 $productColor,
                 null
             );
-
-            var_dump(conectDatabase());
+            if ($product->insert()) {
+                $DiscountService = new DiscountService();
+                $finalPrice = $DiscountService->calculateColorDiscount($productColor);
+                var_dump($finalPrice);
+            }
         }
     }
 

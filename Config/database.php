@@ -1,5 +1,5 @@
 <?php
 const HOST = 'localhost';
-const USUARIO = 'rootTitan';
-const SENHA = 'rootTitan';
+const USUARIO = 'root';
+const SENHA = '';
 const BASE = 'testetitan';
