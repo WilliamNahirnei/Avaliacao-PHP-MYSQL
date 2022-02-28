@@ -2,17 +2,15 @@
     namespace src\Services;
 
     class DiscountService {
-        private array $colorDiscounts = [];
-        private int $teste = 0;
-
+        private static $colorDiscounts = [];
+        
         function __construct(){
-            var_dump(self::$colorDiscounts);
-            self::$colorDiscounts = function(float $price){
+            self::$colorDiscounts["AZUL"] = function(float $price){
                 $discountPercentage = 20;
                 $priceWithDiscount = self::calculatePriceWithDiscount($price, $discountPercentage);
                 return $priceWithDiscount; 
             };
-            
+
             self::$colorDiscounts["VERMELHO"] = function(float $price){
                 $discountPercentage = $price <= 50 ? 20 : 5;
                 $priceWithDiscount = self::calculatePriceWithDiscount($price, $discountPercentage);
@@ -27,7 +25,7 @@
         }
         
         public function calculateColorDiscount($color){
-            return call_user_func(array(self::class, self::$colorDiscounts[$color])); 
+            return call_user_func(self::$colorDiscounts[$color],100); 
         }
 
         private function calculatePriceWithDiscount(float $price, float $percentageDiscount): float{
