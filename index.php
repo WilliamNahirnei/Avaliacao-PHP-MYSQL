@@ -47,8 +47,4 @@
             echo $Response;
         }
     }
-
-    
-    
-    //$route = str_replace(prefixApiUrl,'',$route);
 ?>

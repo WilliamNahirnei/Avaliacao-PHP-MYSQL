@@ -2,6 +2,8 @@
 
     namespace src\repository;
 
+use mysqli;
+
     require_once('src\Database\databaseFunctions.php');
 
     class ProductRepository{
@@ -26,6 +28,15 @@
 
         public static function deleteProduct($idProduct) {
             $query = "DELETE FROM produtos WHERE produtos.idprod=".$idProduct;
+            $response = executeQuery($query);
+            return $response;
+        }
+
+        public static function getAllProductWithPrice(){
+            $query = "SELECT 
+                        * 
+                      FROM produtos
+                      JOIN preco on preco.idprod = produtos.idprod";
             $response = executeQuery($query);
             return $response;
         }

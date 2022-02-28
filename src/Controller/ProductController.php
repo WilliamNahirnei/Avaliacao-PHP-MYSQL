@@ -28,5 +28,11 @@ use Server\Routes\RouteParams;
             $data = $productService->deleteProductPrice(RouteParams::$query);
             return json_encode($data);
         }
+
+        static function getAllProductsWithPrice(){
+            $productService = new ProductService();
+            $data = $productService->getAllProductsWithPrice(RouteParams::$query);
+            return json_encode($data);
+        }
     }
 ?>
