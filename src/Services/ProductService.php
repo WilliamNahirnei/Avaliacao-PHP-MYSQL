@@ -1,18 +1,22 @@
 <?php
     namespace src\Services;
+    
+    use src\Model\Product;
 
     class ProductService {
-        const COLORFUNCTIONS = ARRAY();
+        public function getAllProducts(){
 
-        private static function calculateDiscountValue(int $value, float $percenteValue): float{
-            $preparedPercenteValue = self::preparePercenteValue($percenteValue);
-            $discountValue = $value - $preparedPercenteValue;
-            return $discountValue;
         }
 
-        private static function preparePercenteValue(float $percenteValue): float{
-            $preparedPercenteValue = $percenteValue/100;
+        public function insertProduct($bodyParams){
+            $price = 0;
+            $product = new Product(
+                0,
+                $bodyParams["nameProduct"],
+                $bodyParams["colorProduct"],
+                $price
+            );
         }
-
     }
+
 ?>
