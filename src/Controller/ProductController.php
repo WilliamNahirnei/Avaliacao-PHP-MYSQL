@@ -22,5 +22,11 @@ use Server\Routes\RouteParams;
             $data = $productService->updateProductAndPrice(RouteParams::$query, RouteParams::$body);
             return json_encode($data);
         }
+
+        static function deleteProductPrice(){
+            $productService = new ProductService();
+            $data = $productService->deleteProductPrice(RouteParams::$query);
+            return json_encode($data);
+        }
     }
 ?>

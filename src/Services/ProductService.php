@@ -3,10 +3,14 @@
 
     require_once('./src/Model/Product.php');
     require_once('./src/Model/Price.php');
-
+    require_once('src\Repository\ProductRepository.php');
+    require_once('src\Repository\PriceRepository.php');
     require_once('src\Services\DiscountService.php');
 
     use src\Services\DiscountService;
+    use src\repository\ProductRepository;
+    use src\repository\PriceRepository;
+
 
 use Controller\ProductController;
 use src\Model\Price;
@@ -44,11 +48,110 @@ use src\Model\Product;
                 http_response_code(500);
             }
         }
-                
+
         public function updateProductAndPrice($queryParams, $bodyParams){
-    
+            $response = [];
+
+            $idProduct = $queryParams["idProduct"];
+            $idPrice = $queryParams["idPrice"];
+            $productName = $bodyParams->nameProduct;
+            $price = $bodyParams->price;
+
+            $resultProductSeach = ProductRepository::getProductById($idProduct);
+            if($resultProductSeach){
+                $product = new Product(
+                    $idProduct,
+                    $productName,
+                    $resultProductSeach["cor"],
+                );
+
+                $productColor = $product->colorProduct;
+
+                if ($product->update()) {
+                    $response['Message'][0] = "Update Product Sucess";
+                } else {
+                    $response['Message'] = "Error in update product";
+                    http_response_code(500);
+                    return $response;
+                }
+
+            } else {
+                http_response_code(404);
+                $response['message'] = "product not found";
+                return $response;
+            }
+
+            $resultPriceSeach = PriceRepository::getPriceById($idPrice);
+            if($resultPriceSeach){
+                $DiscountService = new DiscountService();
+                $finalPrice = $DiscountService->calculateColorDiscount($productColor, $price);
+
+                $price = $price = new Price($idPrice, $finalPrice, $resultPriceSeach["idprod"]);
+                $productColor = $product->colorProduct;
+
+                if ($price->update()) {
+                    $price->hasOne();
+                    http_response_code(200);
+                    $response['Message'][1] = "Update Price Sucess";
+                    $response['data'] = $price;
+                    return $response;
+                } else {
+                    $response['Message'] = "Error in update Price";
+                    http_response_code(500);
+                    return $response;
+                }
+
+            } else {
+                http_response_code(404);
+                $response['message'] = "Price not found";
+                return $response;
+            }
+        }
+
+        public function deleteProductPrice($queryParams){
+            $response = [];
+
+            $idProduct = $queryParams["idProduct"];
+            $idPrice = $queryParams["idPrice"];
+
+            $resultPriceSeach = PriceRepository::getPriceById($idPrice);
+            if($resultPriceSeach){
+
+                $price = $price = new Price($idPrice, 0, $resultPriceSeach["idprod"]);
+
+                if ($price->delete()) {
+                    http_response_code(200);
+                    $response['Message'][0] = "delete Price Sucess";
+                } else {
+                    $response['Message'] = "Error in delete Price";
+                    http_response_code(500);
+                    return $response;
+                }
+            } else {
+                http_response_code(404);
+                $response['message'] = "Price not found";
+                return $response;
+            }
+
+            $resultProductSeach = ProductRepository::getProductById($idProduct);
+            if($resultProductSeach){
+                $product = new Product($idProduct, '', '', );
+
+                if ($product->delete()) {
+                    $response['Message'][1] = "success delete product";
+                } else {
+                    $response['Message'] = "Error in delete product";
+                    http_response_code(500);
+                    return $response;
+                }
+            } else {
+                http_response_code(404);
+                $response['message'] = "product not found";
+                return $response;
+            }
+
+            return $response;
+
         }
     }
-
-
 ?>

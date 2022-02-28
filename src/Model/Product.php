@@ -1,7 +1,7 @@
 <?php
     namespace src\Model;
 
-    include('src\Repository\ProductRepository.php');
+    require_once('src\Repository\ProductRepository.php');
 
     use src\Model\Price;
     use src\repository\ProductRepository;
@@ -17,9 +17,6 @@
             $this->colorProduct = $colorProduct;
         }
 
-        public static function getProductById($idProduct){
-
-        }
         public function insert(){
             $response = ProductRepository::insertProduct($this->nameProduct, $this->colorProduct);
 
@@ -31,12 +28,24 @@
             }
         }
 
-        public function update($idProduct){
+        public function update(){
+            $response = ProductRepository::updateProduct($this->idProduct, $this->nameProduct);
 
+            if($response){
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        public function Delete($idProduct){
-
+        public function Delete(){
+            $response = ProductRepository::deleteProduct($this->idProduct);
+            
+            if($response){
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }

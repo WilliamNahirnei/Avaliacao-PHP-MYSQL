@@ -27,12 +27,22 @@
             }
         }
 
-        public function update($idProduct){
-
+        public function update(){
+            $response = PriceRepository::updatePrice($this->price, $this->idPrice);
+            if($response){
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        public function Delete($idProduct){
-
+        public function Delete(){
+            $response = PriceRepository::deletePrice($this->idPrice, $this->idProduct);
+            if($response){
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public function hasOne(){
