@@ -1,26 +1,25 @@
 <?php
     namespace src\Model;
-
-use src\Services\ProductService;
-
+    use src\Model\Price;
+    
     class Product {
-        private int $idProduct;
-        private string $nameProduct;
-        private string $colorProduct;
-        private Price $price;
+        public int $idProduct = 0;
+        public string $nameProduct = "";
+        public string $colorProduct = "";
+        public $price= null;
 
-        function __construct(int $idProduct, string $nameProduct, string $colorProduct, Price $price){
-            self::$idProduct;
-            self::$nameProduct;
-            self::$idProduct;
-            self::$price = $price;
+        function __construct(int $idProduct, string $nameProduct, string $colorProduct, $price){
+            $this->idProduct = $idProduct;
+            $this->nameProduct = $nameProduct;
+            $this->colorProduct = $colorProduct;
+            $this->price = $price;
         }
 
         public static function getProductById($idProduct){
 
         }
         public function insert(){
-
+            
         }
 
         public function update($idProduct){
@@ -32,3 +31,4 @@ use src\Services\ProductService;
         }
 
     }
+?>

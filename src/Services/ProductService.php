@@ -1,7 +1,11 @@
 <?php
     namespace src\Services;
-    
-    use src\Model\Product;
+
+    require_once('./src/Model/Product.php');
+    include('./src/Database/conection.php');
+
+use Controller\ProductController;
+use src\Model\Product;
 
     class ProductService {
         public function getAllProducts(){
@@ -9,13 +13,16 @@
         }
 
         public function insertProduct($bodyParams){
-            $price = 0;
+            $productName = $bodyParams->nameProduct;
+            $productColor = $bodyParams->productColor;
             $product = new Product(
                 0,
-                $bodyParams["nameProduct"],
-                $bodyParams["colorProduct"],
-                $price
+                $productName,
+                $productColor,
+                null
             );
+
+            var_dump(conectDatabase());
         }
     }
 
