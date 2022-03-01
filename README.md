@@ -6,6 +6,8 @@
 # 4° PASSO: INICIE O SERVIDOR APACHE E O SERVIDOR MYSQL.
 # 5° PASSO: Atravez do servidor apache apache acesso o arquivo Frontend/productList.htm.
 
+# Agradecimento especial ao site https://www.visualdicas.com.br/scripts/css/35-botoes-de-alerta-classes-css 
+# Local onde retirei o código css para os botões
 
 # SOBRE O SISTEMA:
   O sistema foi desenvolvido com foco no backend e em sua manutenibilidade, para isso foi desenvolvido um router semelhante a routers utilizados em outras linguagens.
