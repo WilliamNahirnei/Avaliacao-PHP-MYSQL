@@ -6,7 +6,7 @@
     use Server\Routes\Route;
     use Server\Routes\RouteParams;
 
-    header('Content-Type: application/json');
+    header("Content-type: application/json; charset=utf-8");
 
     $totalRoute = $_SERVER["QUERY_STRING"];
     
