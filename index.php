@@ -7,44 +7,48 @@
     use Server\Routes\RouteParams;
 
     header("Content-type: application/json; charset=utf-8");
-
-    $totalRoute = $_SERVER["QUERY_STRING"];
-    
-    //take route prefix
-    $prefix = explode('=',substr($totalRoute,0,7))[1];
-    if($prefix != "Api"){
-        http_response_code(404);
-        $Response = [
-            'Message'=> "Api NotFound"
-        ];
-
-        $Response = json_encode($Response);
-        echo $Response;
-    } else{
-        $route = $_REQUEST["url"];
-        //Remove toute prefix
-        $route = str_replace('Api/','' ,$route);
-
-        //take request body
-        $bodyJson = file_get_contents('php://input');
-    
-        $method = $_SERVER["REQUEST_METHOD"];
-    
-        RouteParams::mountQuery($_REQUEST);
-        RouteParams::mountBody($bodyJson);
+    try{
+        $totalRoute = $_SERVER["QUERY_STRING"];
         
-        if (array_key_exists($route,Route::fecthRouteList()[$method])){
-            $class = Route::fecthRouteList()[$method][$route][0];
-            $method = Route::fecthRouteList()[$method][$route][1];
-            echo call_user_func(array($class, $method)); 
-        } else {
+        //take route prefix
+        $prefix = explode('=',substr($totalRoute,0,7))[1];
+        if($prefix != "Api"){
             http_response_code(404);
             $Response = [
-                'Message'=> "NotFound"
+                'Message'=> "Api NotFound"
             ];
     
             $Response = json_encode($Response);
             echo $Response;
+        } else{
+            $route = $_REQUEST["url"];
+            //Remove toute prefix
+            $route = str_replace('Api/','' ,$route);
+    
+            //take request body
+            $bodyJson = file_get_contents('php://input');
+        
+            $method = $_SERVER["REQUEST_METHOD"];
+        
+            RouteParams::mountQuery($_REQUEST);
+            RouteParams::mountBody($bodyJson);
+            
+            if (array_key_exists($route,Route::fecthRouteList()[$method])){
+                $class = Route::fecthRouteList()[$method][$route][0];
+                $method = Route::fecthRouteList()[$method][$route][1];
+                echo call_user_func(array($class, $method)); 
+            } else {
+                http_response_code(404);
+                $Response = [
+                    'Message'=> "NotFound"
+                ];
+        
+                $Response = json_encode($Response);
+                echo $Response;
+            }
         }
+    } catch (Exception $e){
+        http_response_code(500);
+        echo json_encode(["message"=>"erro no servidor:".$e]);
     }
 ?>

@@ -201,6 +201,10 @@ function getProductPriceByIds(idProduct, idPrice){
     let request = new XMLHttpRequest();
     request.open("GET", `http://localhost/Avaliacao-PHP-MYSQL/Api/getProductPriceByIds?idProduct=${idProduct}&idPrice=${idPrice}`, false)
     request.send()
+    if(request.status!=200){
+        alert("erro ao buscar produto e preço especifico")
+        return
+    }
     response = JSON.parse(request.response)
     return response
 }
@@ -209,6 +213,10 @@ function getProductWithPriceList(){
     let request = new XMLHttpRequest();
     request.open("GET", "http://localhost/Avaliacao-PHP-MYSQL/Api/getAllProductsWithPrice", false)
     request.send()
+    if(request.status!=200){
+        alert("erro ao buscar lista de produtos com preços")
+        return
+    }
     response = JSON.parse(request.response)
     return response
 }
@@ -225,6 +233,10 @@ function insertNewProductPrice(nameProduct, productColor, price){
     request.open("POST", "http://localhost/Avaliacao-PHP-MYSQL/Api/insertProduct", false)
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     request.send(bodyRequest)
+    if(request.status!=200){
+        alert("erro ao inserir produto e preço")
+        return
+    }
     response = JSON.parse(request.response)
     return response
 }
@@ -240,6 +252,10 @@ function updateProductPriceApi(idProduct, idPrice, nameProduct, price){
     request.open("PUT", `http://localhost/Avaliacao-PHP-MYSQL/Api/updateProductAndPrice?idProduct=${idProduct}&idPrice=${idPrice}`, false)
     request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     request.send(bodyRequest)
+    if(request.status!=200){
+        alert("erro ao alterar dados")
+        return
+    }
     response = JSON.parse(request.response)
     return response
 }
@@ -248,6 +264,10 @@ function deleteProductPriceApi(idProduct, idPrice){
     let request = new XMLHttpRequest();
     request.open("DELETE", `http://localhost/Avaliacao-PHP-MYSQL/Api/DeleteProductPrice?idProduct=${idProduct}&idPrice=${idPrice}`, false)
     request.send()
+    if(request.status!=200){
+        alert("erro ao deletar")
+        return
+    }
     response = JSON.parse(request.response)
     return response
 }
