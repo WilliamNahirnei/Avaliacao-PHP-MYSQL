@@ -1,5 +1,11 @@
-<table>
-    <div width="100%" height="100%">
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8"/>
+<head>
+    <title>Lista de Preços</title>
+</head>
+<body>    
+    <div width="100%" height="100%" id="productList">
         <table id="productList" width="100%"  border="1" cellspacing="1" cellpadding="1" bgcolor="white">
             <tr>
                 <th>Nome</th>
@@ -8,10 +14,47 @@
             </tr>
         </table>
     </div>
-</table>
+    <div id="addPrice">
+        <table>
+            <div>
+                <table id="productList" width="100%"  cellspacing="1" cellpadding="1" bgcolor="white">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cor</th>
+                        <th>Preço</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="inputProductName">
+                        </td>
+                        <td>
+                            <select id="inputCollorProduct">
+                                <option value="AZUL">AZUL</option>
+                                <option value="VERMELHO">VERMELHO</option>
+                                <option value="AMARELO">AMARELO</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" id="inputPrice">
+                        </td>
+
+                        <td>
+                            <button onclick="addNewProductPrice()">
+                                + Produto
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </table>
+    </div>
+    <div id="containerUpdateForm">
+        
+    </div>
+</body>
+</html>
 
 <script type="text/javascript" src="./productList.js"></script>
 <script>
-    insertProductInList(1, "celular", "Vermelho", 100)
     loadProductList()
 </script>

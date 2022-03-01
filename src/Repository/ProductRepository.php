@@ -40,6 +40,16 @@ use mysqli;
             $response = executeQuery($query);
             return $response;
         }
+
+        public static function getProductPriceByIds($idProduct, $idPrice){
+            $query = "SELECT 
+                    * 
+                FROM produtos
+                JOIN preco on preco.idprod = produtos.idprod
+                WHERE preco.idpreco = ".$idPrice." AND produtos.idprod = ".$idProduct;
+            $response = executeQuery($query);
+            return $response;
+        }
     }
 
 ?>

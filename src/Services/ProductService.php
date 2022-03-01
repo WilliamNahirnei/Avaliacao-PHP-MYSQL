@@ -17,6 +17,37 @@ use src\Model\Price;
 use src\Model\Product;
 
     class ProductService {
+
+        public function getProductPriceByIds($queryParams){
+            $response = [];
+
+            try{
+                $productPriceList = [];
+
+                $idProduct = $queryParams["idProduct"];
+                $idPrice = $queryParams["idPrice"];
+                $results = ProductRepository::getProductPriceByIds($idProduct, $idPrice);
+                $result = mysqli_fetch_array($results);
+                if($result){
+                    $price = new Price($result['idpreco'], $result['preco'], $result['idprod']);
+                    $product = new Product($result['idprod'], $result['nome'], $result['cor']);
+                    $product->price = $price;
+
+                    http_response_code(200);
+                    $response['data'] = $product;
+                    return $response;
+                } else {
+                    http_response_code(404);
+                    $response['message'] = "Product And Price Not Found";
+                    return $response;
+                }
+                    
+            } catch (Exception $e) {
+                http_response_code(200);
+                $response['data'] = $e;
+            }
+        }
+
         public function getAllProductsWithPrice(){
             $response = [];
 

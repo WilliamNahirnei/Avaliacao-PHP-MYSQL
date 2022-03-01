@@ -6,6 +6,7 @@
     require_once('./src/Controller/ProductController.php');
     use Controller\ProductController;
 
+    Route::get('getProductPriceByIds',[ProductController::class, 'getProductPriceByIds']);
     Route::get('getAllProductsWithPrice',[ProductController::class, 'getAllProductsWithPrice']);
     Route::post('insertProduct',[ProductController::class, 'insertProduct']);
     Route::put('updateProductAndPrice',[ProductController::class, 'updateProductAndPrice']);

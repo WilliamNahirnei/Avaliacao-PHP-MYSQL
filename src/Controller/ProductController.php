@@ -34,5 +34,11 @@ use Server\Routes\RouteParams;
             $data = $productService->getAllProductsWithPrice(RouteParams::$query);
             return json_encode($data);
         }
+
+        static function getProductPriceByIds(){
+            $productService = new ProductService();
+            $data = $productService->getProductPriceByIds(RouteParams::$query);
+            return json_encode($data);
+        }
     }
 ?>
