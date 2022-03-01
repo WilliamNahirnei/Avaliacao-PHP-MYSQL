@@ -11,12 +11,24 @@ function insertProductInList(idProduct, nameProduct, colorProduct, priceProduct,
     let visualUpdateButtonContainer = document.createElement("td")
     let visualDeleteButtonContainer = document.createElement("td")
 
+    visualProductName.align="center"
+    visualColorProduct.align="center"
+    visualPriceProduct.align="center"
+    visualUpdateButtonContainer.align="center"
+    visualDeleteButtonContainer.align="center"
+
+
     let visualUpdateButton = document.createElement("button")
     let visualDeleteButton = document.createElement("button")
 
     visualUpdateButton.textContent = "Atualizar Dados"
     visualDeleteButton.textContent = "Deletar Registro"
 
+    visualUpdateButton.classList.add ("btn")
+    visualUpdateButton.classList.add ("info")
+
+    visualDeleteButton.classList.add ("btn")
+    visualDeleteButton.classList.add ("danger")
     visualDeleteButton.addEventListener("click", function (){
         deleteProductPrice(idProduct, idPrice)}
     )
@@ -83,6 +95,11 @@ function constructUpdateForm(idProduct, idPrice){
 
     updateForm.id = `updateForm${idProduct, idPrice}`
 
+    updateForm.width="100%"
+    // updateForm.cellspacing="1"
+    // updateForm.cellpadding="1"
+    // updateForm.bgcolor="white"
+
     //headerLine
     const headerLine = document.createElement("tr")
     const nameHeader = document.createElement("th")
@@ -104,6 +121,11 @@ function constructUpdateForm(idProduct, idPrice){
     const updateContainer = document.createElement("td")
     const cancelContainer = document.createElement("td")
 
+    nameProduct.align="center"
+    PriceProduct.align="center"
+    updateContainer.align="center"
+    cancelContainer.align="center"
+
     const inputName = document.createElement("input")
     const inputPrice = document.createElement("input")
 
@@ -121,16 +143,32 @@ function constructUpdateForm(idProduct, idPrice){
 
 
     const visualUpdateButton = document.createElement("button")
-    const visualDeleteButton = document.createElement("button")
-
+    
     visualUpdateButton.textContent = "Atualizar"
 
+    visualUpdateButton.classList.add ("btn")
+    visualUpdateButton.classList.add ("success")
+    
     visualUpdateButton.addEventListener("click", function (){
         updateProductPrice(idProduct, idPrice)
     })
-
+    
     updateContainer.appendChild(visualUpdateButton)
     productLine.appendChild(updateContainer)
+    
+
+    const visualDeleteButton = document.createElement("button")
+
+    visualDeleteButton.textContent = "Cancelar"
+    visualDeleteButton.classList.add ("btn")
+    visualDeleteButton.classList.add ("danger")
+    visualDeleteButton.addEventListener("click", function (){
+        removeElements( `updateForm${idProduct, idPrice}`)
+    })
+
+    cancelContainer.appendChild(visualDeleteButton)
+    productLine.appendChild(cancelContainer)
+
 
     updateForm.appendChild(productLine)
     //end ProductLine
